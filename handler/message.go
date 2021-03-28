@@ -1,7 +1,12 @@
-package log
+package handler
 
 type Message struct {
 	halted bool
+	tags   []string
+}
+
+func BuildMessage(tags []string) Message {
+	return Message{tags: tags}
 }
 
 func (msg Message) Halt() Message {
@@ -11,4 +16,8 @@ func (msg Message) Halt() Message {
 
 func (msg Message) IsHalted() bool {
 	return msg.halted
+}
+
+func (msg Message) Tags() []string {
+	return msg.tags
 }

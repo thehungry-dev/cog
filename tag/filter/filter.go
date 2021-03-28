@@ -72,6 +72,9 @@ func (tagFilter *TagFilter) IsRequiredOneOfTag(tag string) bool {
 }
 
 func (tagFilter *TagFilter) Select(tags []string) bool {
+	if tagFilter == nil {
+		return true
+	}
 	if len(tags) == 0 {
 		return tagFilter.untagged
 	}

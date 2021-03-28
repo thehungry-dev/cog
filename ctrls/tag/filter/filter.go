@@ -32,3 +32,6 @@ func StringExample() string {
 func TagFilterExample() *filter.TagFilter {
 	return filter.Parse(StringExample())
 }
+func TagFilterNothingExample() *filter.TagFilter {
+	return filter.Nothing
+}
