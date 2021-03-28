@@ -48,9 +48,11 @@ func Parse(filterText string) *TagFilter {
 		case tag == UntaggedKeyword:
 			filter.untagged = true
 		case strings.HasPrefix(tag, TagRequiredToken):
-			requiredTags.Add(tag)
+			trimmedTag := strings.TrimPrefix(tag, TagRequiredToken)
+			requiredTags.Add(trimmedTag)
 		case strings.HasPrefix(tag, TagExcludedToken):
-			excludedTags.Add(tag)
+			trimmedTag := strings.TrimPrefix(tag, TagExcludedToken)
+			excludedTags.Add(trimmedTag)
 		default:
 			oneOfTags.Add(tag)
 		}
@@ -67,4 +69,25 @@ func (tagFilter *TagFilter) IsExcludedTag(tag string) bool {
 }
 func (tagFilter *TagFilter) IsRequiredOneOfTag(tag string) bool {
 	return tagFilter.oneOfTags.Include(tag)
+}
+
+func (tagFilter *TagFilter) Select(tags []string) bool {
+	if len(tags) == 0 {
+		return tagFilter.untagged
+	}
+	if !tagFilter.requiredTags.SubsetOf(tags) {
+		return false
+	}
+	if tagFilter.excludedTags.IncludeAny(tags) {
+		return false
+	}
+	if !tagFilter.oneOfTags.IncludeAny(tags) {
+		return false
+	}
+
+	return true
+}
+
+func (tagFilter *TagFilter) Reject(tags []string) bool {
+	return !tagFilter.Select(tags)
 }

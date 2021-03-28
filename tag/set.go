@@ -3,7 +3,7 @@ package tag
 type Nothing struct{}
 type Set map[string]Nothing
 
-func BuildSet(tags ...string) Set {
+func BuildSet(tags []string) Set {
 	set := make(map[string]Nothing, len(tags))
 
 	for _, tag := range tags {
@@ -29,6 +29,53 @@ func (set Set) Include(tag string) bool {
 	_, ok := set[tag]
 
 	return ok
+}
+
+func (set Set) IncludeAll(tags []string) bool {
+	if set == nil {
+		return false
+	}
+
+	for _, tag := range tags {
+		if _, ok := set[tag]; !ok {
+			return false
+		}
+	}
+
+	return true
+}
+
+func (set Set) IncludeAny(tags []string) bool {
+	if set == nil {
+		return true
+	}
+
+	for _, tag := range tags {
+		if _, ok := set[tag]; ok {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (set Set) SubsetOf(tags []string) bool {
+	if set == nil {
+		return true
+	}
+	if len(tags) == 0 {
+		return true
+	}
+
+	tagsSet := BuildSet(tags)
+
+	for subTag := range set {
+		if !tagsSet.Include(subTag) {
+			return false
+		}
+	}
+
+	return true
 }
 
 func (set Set) Exclude(tag string) bool {

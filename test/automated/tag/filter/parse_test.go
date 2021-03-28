@@ -17,28 +17,28 @@ func TestTagFilterParse(t *testing.T) {
 
 				t.Run("One of tags", func(t *testing.T) {
 					tagFilter := filter.Parse(tagFilterString)
-					oneOfTag := ctrls.OneOfTagExample()
+					oneOfTagName := ctrls.TagNameOneOfExample()
 
 					t.Run("Included", func(t *testing.T) {
-						Assert(t, tagFilter.IsRequiredOneOfTag(oneOfTag))
+						Assert(t, tagFilter.IsRequiredOneOfTag(oneOfTagName))
 					})
 				})
 
 				t.Run("Required tags", func(t *testing.T) {
 					tagFilter := filter.Parse(tagFilterString)
-					requiredTag := ctrls.RequiredTagExample()
+					requiredTagName := ctrls.TagNameRequiredExample()
 
 					t.Run("Included", func(t *testing.T) {
-						Assert(t, tagFilter.IsRequiredTag(requiredTag))
+						Assert(t, tagFilter.IsRequiredTag(requiredTagName))
 					})
 				})
 
 				t.Run("Excluded tags", func(t *testing.T) {
 					tagFilter := filter.Parse(tagFilterString)
-					excludeTag := ctrls.ExcludeTagExample()
+					excludedTagName := ctrls.TagNameExcludedExample()
 
 					t.Run("Included", func(t *testing.T) {
-						Assert(t, tagFilter.IsExcludedTag(excludeTag))
+						Assert(t, tagFilter.IsExcludedTag(excludedTagName))
 					})
 				})
 			})

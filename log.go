@@ -3,6 +3,9 @@ package log
 
 var DefaultLogger Handler
 
+// ParseEnvTagFilter
+// ParseEnvLevelFilter
+
 func init() {
 	DefaultLogger = Pipe{}
 }
