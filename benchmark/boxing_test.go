@@ -4,8 +4,6 @@ import (
 	"testing"
 )
 
-var ensure interface{}
-
 type boxed interface {
 	Do()
 }

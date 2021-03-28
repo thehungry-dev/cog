@@ -7,7 +7,7 @@ build:
 	go build
 
 test:
-	go test -v ./test/...
+	go test -v ./test/automated/...
 
 bench:
 	cd benchmark; \
@@ -15,3 +15,6 @@ bench:
 
 clean:
 	go clean -i github.com/theungry-dev/log...
+
+interactive:
+	go run test/interactive/$(TEST)/main.go
