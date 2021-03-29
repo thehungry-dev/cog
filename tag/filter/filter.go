@@ -62,12 +62,21 @@ func Parse(filterText string) *TagFilter {
 }
 
 func (tagFilter *TagFilter) IsRequiredTag(tag string) bool {
+	if tagFilter == nil {
+		return false
+	}
 	return tagFilter.requiredTags.Include(tag)
 }
 func (tagFilter *TagFilter) IsExcludedTag(tag string) bool {
+	if tagFilter == nil {
+		return false
+	}
 	return tagFilter.excludedTags.Include(tag)
 }
 func (tagFilter *TagFilter) IsRequiredOneOfTag(tag string) bool {
+	if tagFilter == nil {
+		return false
+	}
 	return tagFilter.oneOfTags.Include(tag)
 }
 
