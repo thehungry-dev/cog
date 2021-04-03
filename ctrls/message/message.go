@@ -2,8 +2,8 @@ package handler
 
 import (
 	tagfilterctrls "github.com/thehungry-dev/log/ctrls/tag/filter"
-	"github.com/thehungry-dev/log/handler"
 	"github.com/thehungry-dev/log/level"
+	"github.com/thehungry-dev/log/message"
 )
 
 func MessageTagsExample() []string {
@@ -19,17 +19,17 @@ func MessageTagsExcludedExample() []string {
 	return tagfilterctrls.TagsExcludedMatchingExample()
 }
 
-func MessageExample() handler.Message {
-	msg := handler.BuildMessage(MessageTagsExample())
+func MessageExample() message.Message {
+	msg := message.Build(MessageTagsExample())
 	msg = msg.SetLevel(MessageLevelExample())
 
 	return msg
 }
-func MessageExcludedExample() handler.Message {
-	return handler.BuildMessage(MessageTagsExcludedExample())
+func MessageExcludedExample() message.Message {
+	return message.Build(MessageTagsExcludedExample())
 }
-func MessageLevelExcludedExample() handler.Message {
-	msg := handler.BuildMessage(MessageTagsExample())
+func MessageLevelExcludedExample() message.Message {
+	msg := message.Build(MessageTagsExample())
 	msg = msg.SetLevel(MessageLevelAlternateExample())
 
 	return msg

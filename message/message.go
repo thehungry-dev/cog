@@ -1,4 +1,5 @@
-package handler
+// Package message helps building a log message
+package message
 
 import "github.com/thehungry-dev/log/level"
 
@@ -8,7 +9,7 @@ type Message struct {
 	level  level.Level
 }
 
-func BuildMessage(tags []string) Message {
+func Build(tags []string) Message {
 	return Message{tags: tags}
 }
 

@@ -6,13 +6,14 @@ import (
 	. "github.com/thehungry-dev/asserting"
 
 	ctrls "github.com/thehungry-dev/log/ctrls/handler"
+	msgctrls "github.com/thehungry-dev/log/ctrls/message"
 )
 
 func TestLevelFilterHandler(t *testing.T) {
 	t.Run("Level Filter Handler", func(t *testing.T) {
 		t.Run("Matching", func(t *testing.T) {
 			handler := ctrls.LevelFilterExample()
-			msg := ctrls.MessageExample()
+			msg := msgctrls.MessageExample()
 
 			Assert(t, !msg.IsHalted())
 
@@ -25,7 +26,7 @@ func TestLevelFilterHandler(t *testing.T) {
 
 		t.Run("Not Matching", func(t *testing.T) {
 			handler := ctrls.LevelFilterExample()
-			msg := ctrls.MessageLevelExcludedExample()
+			msg := msgctrls.MessageLevelExcludedExample()
 
 			Assert(t, !msg.IsHalted())
 
