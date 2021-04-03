@@ -20,16 +20,20 @@ func MessageTagsExcludedExample() []string {
 }
 
 func MessageExample() message.Message {
-	msg := message.Build(MessageTagsExample())
+	msg := message.New()
+	msg = msg.SetTags(MessageTagsExample())
 	msg = msg.SetLevel(MessageLevelExample())
 
 	return msg
 }
 func MessageExcludedExample() message.Message {
-	return message.Build(MessageTagsExcludedExample())
+	msg := message.New()
+	msg.SetTags(MessageTagsExcludedExample())
+	return msg
 }
 func MessageLevelExcludedExample() message.Message {
-	msg := message.Build(MessageTagsExample())
+	msg := message.New()
+	msg = msg.SetTags(MessageTagsExample())
 	msg = msg.SetLevel(MessageLevelAlternateExample())
 
 	return msg

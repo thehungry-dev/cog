@@ -9,8 +9,8 @@ type Message struct {
 	level  level.Level
 }
 
-func Build(tags []string) Message {
-	return Message{tags: tags}
+func New() Message {
+	return Message{}
 }
 
 func (msg Message) Halt() Message {
