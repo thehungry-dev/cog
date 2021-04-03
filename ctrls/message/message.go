@@ -4,6 +4,8 @@ import (
 	tagfilterctrls "github.com/thehungry-dev/log/ctrls/tag/filter"
 	"github.com/thehungry-dev/log/level"
 	"github.com/thehungry-dev/log/message"
+	"github.com/thehungry-dev/log/message/field"
+	"github.com/thehungry-dev/log/message/name"
 )
 
 func MessageTagsExample() []string {
@@ -35,6 +37,17 @@ func MessageLevelExcludedExample() message.Message {
 	msg := message.New()
 	msg = msg.SetTags(MessageTagsExample())
 	msg = msg.SetLevel(MessageLevelAlternateExample())
+
+	return msg
+}
+
+func MessageWithFieldsExample() message.Message {
+	msg := MessageExample()
+	msg = msg.SetFields([]field.Field{
+		{Type: field.String, Name: name.Text, ValueString: "Example Message"},
+		{Type: field.Int64, Name: "ID", ValueNumeric: 12},
+		{Type: field.Bool, Name: "Success", ValueNumeric: 1},
+	})
 
 	return msg
 }

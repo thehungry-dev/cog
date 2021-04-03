@@ -25,7 +25,7 @@ const (
 )
 
 const (
-	None level.Level = level.Level(^uint(0) >> 1)
+	None level.Level = level.Level(^uint8(0) >> 1)
 	All  level.Level = -None - 1
 )
 

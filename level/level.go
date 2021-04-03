@@ -1,6 +1,6 @@
 package level
 
-type Level int
+type Level int8
 
 const (
 	Trace Level = iota

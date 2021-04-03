@@ -1,7 +1,14 @@
 package main
 
+import (
+	"fmt"
+
+	ctrls "github.com/thehungry-dev/log/ctrls/message"
+	"github.com/thehungry-dev/log/message/transform"
+)
+
 func main() {
-	// msg := log.Message{}
-	// logger := log.DefaultLogger
-	// logger.Handle(msg)
+	msg := ctrls.MessageWithFieldsExample()
+	text := transform.ToString(msg)
+	fmt.Println(text)
 }
