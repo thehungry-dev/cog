@@ -23,31 +23,32 @@ func MessageTagsExcludedExample() []string {
 
 func MessageExample() message.Message {
 	msg := message.New()
-	msg = msg.SetTags(MessageTagsExample())
-	msg = msg.SetLevel(MessageLevelExample())
+	msg.Tags = MessageTagsExample()
+	msg.Level = MessageLevelExample()
 
 	return msg
 }
 func MessageExcludedExample() message.Message {
 	msg := message.New()
-	msg.SetTags(MessageTagsExcludedExample())
+	msg.Tags = MessageTagsExcludedExample()
+
 	return msg
 }
 func MessageLevelExcludedExample() message.Message {
 	msg := message.New()
-	msg = msg.SetTags(MessageTagsExample())
-	msg = msg.SetLevel(MessageLevelAlternateExample())
+	msg.Tags = MessageTagsExample()
+	msg.Level = MessageLevelAlternateExample()
 
 	return msg
 }
 
 func MessageWithFieldsExample() message.Message {
 	msg := MessageExample()
-	msg = msg.SetFields([]field.Field{
+	msg.Fields = []field.Field{
 		{Type: field.String, Name: name.Text, ValueString: "Example Message"},
 		{Type: field.Int64, Name: "ID", ValueNumeric: 12},
 		{Type: field.Bool, Name: "Success", ValueNumeric: 1},
-	})
+	}
 
 	return msg
 }

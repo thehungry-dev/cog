@@ -20,7 +20,7 @@ func BuildLevelFilter(filterText string) LevelFilter {
 }
 
 func (handler LevelFilter) Handle(msg message.Message) message.Message {
-	if handler.levelFilter.Select(msg.Level()) {
+	if handler.levelFilter.Select(msg.Level) {
 		return msg
 	}
 

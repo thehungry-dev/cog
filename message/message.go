@@ -8,9 +8,9 @@ import (
 
 type Message struct {
 	halted bool
-	tags   []string
-	level  level.Level
-	fields []field.Field
+	Tags   []string
+	Level  level.Level
+	Fields []field.Field
 }
 
 func New() Message {
@@ -25,33 +25,10 @@ func (msg Message) IsHalted() bool {
 	return msg.halted
 }
 
-func (msg Message) Tags() []string {
-	return msg.tags
-}
-func (msg Message) SetTags(tags []string) Message {
-	msg.tags = tags
-	return msg
-}
-
-func (msg Message) Level() level.Level {
-	return msg.level
-}
-func (msg Message) SetLevel(level level.Level) Message {
-	msg.level = level
-	return msg
-}
-
-func (msg Message) Fields() []field.Field {
-	return msg.fields
-}
 func (msg Message) Field(index int) field.Field {
-	return msg.fields[index]
-}
-func (msg Message) SetFields(fields []field.Field) Message {
-	msg.fields = fields
-	return msg
+	return msg.Fields[index]
 }
 
 func (msg Message) HasFields() bool {
-	return len(msg.fields) > 0
+	return len(msg.Fields) > 0
 }

@@ -18,7 +18,7 @@ func ToText(msg message.Message) string {
 
 	b.WriteString(text)
 
-	for index, fld := range msg.Fields() {
+	for index, fld := range msg.Fields {
 		if index == 0 {
 			b.WriteString(" (")
 			hasData = true
