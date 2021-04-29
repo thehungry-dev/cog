@@ -3,24 +3,19 @@ package transform
 
 import (
 	"github.com/thehungry-dev/log/message"
-	"github.com/thehungry-dev/log/message/field/name"
 )
 
-func TextMessage(msg message.Message) (string, bool) {
-	if !IsTextMessage(msg) {
-		return "", false
-	}
-	return msg.Field(0).ValueString, true
-}
-
-func IsTextMessage(msg message.Message) bool {
-	return msg.HasFields() && msg.Field(0).Name == name.Body
-}
-
 func ToString(msg message.Message) string {
-	if IsTextMessage(msg) {
-		return ToText(msg)
+	var output string
+
+	switch msg.Content {
+	case message.TextContent:
+		output = ToText(msg)
+	case message.DataContent:
+		output = ToJSON(msg)
+	default:
+		output = "<content not implemented>"
 	}
 
-	return ToJSON(msg)
+	return output
 }

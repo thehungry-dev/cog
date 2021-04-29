@@ -44,6 +44,7 @@ func MessageLevelExcludedExample() message.Message {
 
 func MessageWithFieldsExample() message.Message {
 	msg := MessageExample()
+	msg.Content = message.TextContent
 	msg.Fields = []field.Field{
 		{Type: field.String, Name: name.Body, ValueString: "Example Message"},
 		{Type: field.Int64, Name: "ID", ValueNumeric: 12},

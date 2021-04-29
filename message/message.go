@@ -8,8 +8,12 @@ import (
 
 type Message struct {
 	halted bool
-	Tags   []string
-	Level  level.Level
+
+	Tags    []string
+	Level   level.Level
+	Content Content
+	Body    string
+
 	Fields []field.Field
 }
 

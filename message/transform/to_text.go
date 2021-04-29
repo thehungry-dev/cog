@@ -7,11 +7,7 @@ import (
 )
 
 func ToText(msg message.Message) string {
-	text, ok := TextMessage(msg)
-
-	if !ok {
-		panic("Message is not a text message")
-	}
+	text := msg.Body
 
 	var b strings.Builder
 	var hasData bool
