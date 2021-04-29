@@ -5,7 +5,7 @@ import (
 	"github.com/thehungry-dev/log/level"
 	"github.com/thehungry-dev/log/message"
 	"github.com/thehungry-dev/log/message/field"
-	"github.com/thehungry-dev/log/message/name"
+	"github.com/thehungry-dev/log/message/field/name"
 )
 
 func MessageTagsExample() []string {
@@ -45,7 +45,7 @@ func MessageLevelExcludedExample() message.Message {
 func MessageWithFieldsExample() message.Message {
 	msg := MessageExample()
 	msg.Fields = []field.Field{
-		{Type: field.String, Name: name.Text, ValueString: "Example Message"},
+		{Type: field.String, Name: name.Body, ValueString: "Example Message"},
 		{Type: field.Int64, Name: "ID", ValueNumeric: 12},
 		{Type: field.Bool, Name: "Success", ValueNumeric: 1},
 	}

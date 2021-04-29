@@ -25,10 +25,6 @@ func FieldToString(fld field.Field) (string, bool) {
 		output = strconv.FormatInt(fld.ValueNumeric, 10)
 	case field.Bool:
 		output = strconv.FormatBool(fld.ValueNumeric == 1)
-	case field.Array:
-		output = "<array>"
-	case field.Object:
-		output = "<object>"
 	case field.Complex128:
 		fallthrough
 	case field.Complex64:

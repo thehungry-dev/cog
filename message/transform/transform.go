@@ -3,7 +3,7 @@ package transform
 
 import (
 	"github.com/thehungry-dev/log/message"
-	"github.com/thehungry-dev/log/message/name"
+	"github.com/thehungry-dev/log/message/field/name"
 )
 
 func TextMessage(msg message.Message) (string, bool) {
@@ -14,7 +14,7 @@ func TextMessage(msg message.Message) (string, bool) {
 }
 
 func IsTextMessage(msg message.Message) bool {
-	return msg.HasFields() && msg.Field(0).Name == name.Text
+	return msg.HasFields() && msg.Field(0).Name == name.Body
 }
 
 func ToString(msg message.Message) string {

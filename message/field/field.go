@@ -19,8 +19,6 @@ const (
 	Int16
 	Int8
 	Bool
-	Array
-	Object
 	Complex128
 	Complex64
 	Float64
