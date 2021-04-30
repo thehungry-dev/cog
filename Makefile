@@ -1,4 +1,4 @@
-.PHONY: clean build test bench
+.PHONY: clean build test bench deps
 
 BENCHTIME ?= 1s
 BENCH_FLAGS ?= -cpuprofile=cpu.pprof -memprofile=mem.pprof -benchmem -benchtime=$(BENCHTIME)
@@ -18,3 +18,6 @@ clean:
 
 interactive:
 	go run test/interactive/$(TEST)/main.go
+
+deps:
+	go get && go mod tidy

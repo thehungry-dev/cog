@@ -10,5 +10,6 @@ import (
 func main() {
 	msg := ctrls.MessageWithFieldsExample()
 	text := transform.ToString(msg)
+	text = transform.ToJSON(msg)
 	fmt.Println(text)
 }

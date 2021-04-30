@@ -5,7 +5,6 @@ Fast, composable structured and unstructured logging for Go
 ## TODO
 
 - ToJSON
-- Field array/object
 
 ## Notes
 
