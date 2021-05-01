@@ -9,6 +9,7 @@ type Field struct {
 	ValueString    string
 	ValueNumeric   int64
 	ValueInterface interface{}
+	Private        bool
 }
 
 const (
@@ -24,4 +25,10 @@ const (
 	Float64
 	Float32
 	Nil
+	Object
+	Array
 )
+
+func (fld Field) IsOutput() bool {
+	return !fld.Private && fld.Type != None
+}

@@ -10,18 +10,23 @@ func ToText(msg message.Message) string {
 	text := msg.Body
 
 	var b strings.Builder
-	var hasData bool
 
 	b.WriteString(text)
 
-	for index, fld := range msg.Fields {
-		if index == 0 {
-			b.WriteString(" (")
-			hasData = true
+	var publicFieldsCount = 0
+
+	for _, fld := range msg.Fields {
+		if !fld.IsOutput() {
 			continue
 		}
 
-		if index != 1 {
+		publicFieldsCount += 1
+
+		if publicFieldsCount == 1 {
+			b.WriteString(" (")
+		}
+
+		if publicFieldsCount > 1 {
 			b.WriteString(", ")
 		}
 
@@ -32,7 +37,7 @@ func ToText(msg message.Message) string {
 		b.WriteString(output)
 	}
 
-	if hasData {
+	if publicFieldsCount > 0 {
 		b.WriteString(")")
 	}
 

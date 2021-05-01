@@ -38,6 +38,10 @@ func FieldToString(fld field.Field) (string, bool) {
 		output = strconv.FormatFloat(float64(math.Float32frombits(uvalue)), 'f', 2, 64)
 	case field.Nil:
 		output = "<nil>"
+	case field.Object:
+		output = "<object>"
+	case field.Array:
+		output = "<array>"
 	default:
 		output = "<unrecognized>"
 		success = false
