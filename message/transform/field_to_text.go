@@ -1,13 +1,16 @@
 package transform
 
 import (
+	"encoding/json"
 	"math"
 	"strconv"
+	"strings"
 
+	"github.com/thehungry-dev/log/message"
 	"github.com/thehungry-dev/log/message/field"
 )
 
-func FieldToString(fld field.Field) (string, bool) {
+func FieldToText(fld field.Field) (string, bool) {
 	success := true
 	var output string
 
@@ -48,4 +51,61 @@ func FieldToString(fld field.Field) (string, bool) {
 	}
 
 	return output, success
+}
+
+func FieldsToText(msg message.Message) string {
+	var b strings.Builder
+
+	var publicFieldsCount = 0
+
+	for _, fld := range msg.Fields {
+		if !fld.IsOutput() {
+			continue
+		}
+
+		publicFieldsCount += 1
+
+		if publicFieldsCount == 1 {
+			b.WriteString(" (")
+		}
+
+		if publicFieldsCount > 1 {
+			b.WriteString(", ")
+		}
+
+		b.WriteString(fld.Name)
+		b.WriteString(": ")
+
+		output, _ := FieldToText(fld)
+		b.WriteString(output)
+	}
+
+	if publicFieldsCount > 0 {
+		b.WriteString(")")
+	}
+
+	return b.String()
+}
+
+func FieldsToTextJSON(msg message.Message) string {
+	if !msg.HasFields() {
+		return ""
+	}
+
+	var buf strings.Builder
+
+	jsonData := FieldsToJSONType(msg)
+
+	output, err := json.MarshalIndent(jsonData, "", "  ")
+
+	if err != nil {
+		panic(err)
+	}
+
+	if msg.Body != "" {
+		buf.WriteString("\n")
+	}
+	buf.Write(output)
+
+	return buf.String()
 }

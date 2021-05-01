@@ -1,21 +1,28 @@
 // Package transform converts a log message into different formats
 package transform
 
-import (
-	"github.com/thehungry-dev/log/message"
-)
+type Config struct {
+	Timestamp bool
+	Tags      bool
+	Level     bool
+	Fields    bool
+}
 
-func ToString(msg message.Message) string {
-	var output string
+var DefaultConfig Config
+var EverythingConfig Config
 
-	switch msg.Content {
-	case message.TextContent:
-		output = ToText(msg)
-	case message.DataContent:
-		output = ToJSON(msg)
-	default:
-		output = "<content not implemented>"
+func init() {
+	DefaultConfig = Config{
+		Timestamp: true,
+		Tags:      false,
+		Level:     true,
+		Fields:    true,
 	}
 
-	return output
+	EverythingConfig = Config{
+		Timestamp: true,
+		Tags:      true,
+		Level:     true,
+		Fields:    true,
+	}
 }

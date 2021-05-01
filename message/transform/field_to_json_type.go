@@ -3,6 +3,7 @@ package transform
 import (
 	"math"
 
+	"github.com/thehungry-dev/log/message"
 	"github.com/thehungry-dev/log/message/field"
 )
 
@@ -46,4 +47,40 @@ func FieldToJSONType(fld field.Field) (interface{}, bool) {
 	}
 
 	return output, success
+}
+
+func FieldsToJSONType(msg message.Message) map[string]interface{} {
+	var output map[string]interface{}
+
+	if !msg.HasFields() {
+		return output
+	}
+
+	if msg.HasFields() {
+		data := make(map[string]interface{}, len(msg.Fields))
+		hasData := false
+
+		for _, fld := range msg.Fields {
+			if !fld.IsOutput() {
+				continue
+			}
+
+			value, ok := FieldToJSONType(fld)
+
+			if !ok {
+				continue
+			}
+
+			data[fld.Name] = value
+			hasData = true
+		}
+
+		if !hasData {
+			return output
+		}
+
+		output = data
+	}
+
+	return output
 }
