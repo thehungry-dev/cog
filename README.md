@@ -5,6 +5,7 @@ Fast, composable structured and unstructured logging for Go
 ## TODO
 
 - Coloring output in handler
+- Tag filtering broken for + and -
 
 ## Notes
 

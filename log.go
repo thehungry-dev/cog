@@ -2,11 +2,10 @@
 package log
 
 import (
-	"os"
-
 	"github.com/thehungry-dev/log/handler"
 	"github.com/thehungry-dev/log/message/field"
 	"github.com/thehungry-dev/log/message/transform"
+	"github.com/thehungry-dev/log/settings"
 )
 
 var Private field.Builder
@@ -46,33 +45,33 @@ func Errorf(f string, a ...interface{}) { DefaultWriter.Errorf(f, a...) }
 func Fatal(body string)                 { DefaultWriter.Fatal(body) }
 func Fatalf(f string, a ...interface{}) { DefaultWriter.Fatalf(f, a...) }
 
-// // ParseEnvTagFilter
-// // ParseEnvLevelFilter
-
 func init() {
 	Private = field.Builder{Private: true}
 
+	set := settings.Getenv()
+	device := set.Device()
+
 	DefaultWriter = With(
 		handler.BuildPipe(
-			handler.BuildLevelFilter("_min"),
-			handler.BuildTagFilter(""),
-			handler.BuildStringIOText(os.Stderr),
+			set.LevelFilter(),
+			set.TagFilter(),
+			handler.BuildStringIOText(device),
 		),
 	)
 
 	JSONWriter = With(
 		handler.BuildPipe(
-			handler.BuildLevelFilter("_min"),
-			handler.BuildTagFilter(""),
-			handler.BuildStringIOJSON(os.Stderr),
+			set.LevelFilter(),
+			set.TagFilter(),
+			handler.BuildStringIOJSON(device),
 		),
 	)
 
 	TagsWriter = With(
 		handler.BuildPipe(
-			handler.BuildLevelFilter("_min"),
-			handler.BuildTagFilter(""),
-			handler.BuildStringIOTextConfigured(os.Stderr, transform.EverythingConfig),
+			set.LevelFilter(),
+			set.TagFilter(),
+			handler.BuildStringIOTextConfigured(device, transform.EverythingConfig),
 		),
 	)
 }

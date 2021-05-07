@@ -33,6 +33,10 @@ func BuildStringIOText(writer io.StringWriter) StringIO {
 }
 
 func (handler StringIO) Handle(msg message.Message) message.Message {
+	if msg.IsHalted() {
+		return msg
+	}
+
 	var output string
 
 	switch handler.format {
