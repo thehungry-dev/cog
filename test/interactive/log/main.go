@@ -1,30 +1,40 @@
 package main
 
-import (
-	"fmt"
-
-	ctrls "github.com/thehungry-dev/log/ctrls/message"
-	"github.com/thehungry-dev/log/message"
-	"github.com/thehungry-dev/log/message/transform"
-)
+import "github.com/thehungry-dev/log"
 
 func main() {
-	msg := ctrls.MessageWithFieldsExample()
-	var text string
-	text = transform.ToJSON(msg)
-	fmt.Println(text)
-	text = transform.ToText(msg)
-	fmt.Println(text)
-	text = transform.ToTextConfigured(msg, transform.EverythingConfig)
-	fmt.Println(text)
-	msg.Content = message.DataContent
-	text = transform.ToText(msg)
-	fmt.Println(text)
-	text = transform.ToTextConfigured(msg, transform.EverythingConfig)
-	fmt.Println(text)
-	msg.Body = ""
-	text = transform.ToText(msg)
-	fmt.Println(text)
-	text = transform.ToJSON(msg)
-	fmt.Println(text)
+	log.
+		Tags("foo", "bar").
+		Data(
+			log.String("name", "aName"),
+			log.String("lastName", "aLastName"),
+		).
+		Info("This is the body of a message")
+
+	log.Error("Some error")
+
+	log.
+		Data(
+			log.Int("aNumber", 123),
+		).
+		Fatald()
+
+	log.
+		TagsWriter.
+		Tags("foo", "bar").
+		Data(
+			log.String("name", "aName"),
+			log.String("lastName", "aLastName"),
+		).
+		Info("This is the body of a message with tags")
+
+	log.
+		JSONWriter.
+		Tags("foo", "bar").
+		Data(
+			log.String("name", "aName"),
+			log.String("lastName", "aLastName"),
+			log.Int("age", 123),
+		).
+		Info("This is the body of a message with tags")
 }

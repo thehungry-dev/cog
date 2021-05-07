@@ -2,6 +2,7 @@ package transform
 
 import (
 	"encoding/json"
+	"strings"
 	"time"
 
 	"github.com/thehungry-dev/log/message"
@@ -29,5 +30,10 @@ func ToJSON(msg message.Message) string {
 		panic(err)
 	}
 
-	return string(output)
+	var buf strings.Builder
+
+	buf.Write(output)
+	buf.WriteString("\n")
+
+	return buf.String()
 }

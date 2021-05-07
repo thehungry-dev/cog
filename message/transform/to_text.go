@@ -36,6 +36,8 @@ func ToTextConfigured(msg message.Message, config Config) string {
 		fields(&buf, msg)
 	}
 
+	buf.WriteString("\n")
+
 	return buf.String()
 }
 
@@ -51,7 +53,7 @@ func tags(buf io.StringWriter, msg message.Message) {
 		return
 	}
 
-	buf.WriteString("(")
+	buf.WriteString("|")
 
 	for index, tag := range msg.Tags {
 		if index != 0 {
@@ -60,19 +62,17 @@ func tags(buf io.StringWriter, msg message.Message) {
 		buf.WriteString(tag)
 	}
 
-	buf.WriteString(") ")
+	buf.WriteString("| ")
 }
 
 func level(buf io.StringWriter, msg message.Message) {
 	lvlText := msg.Level.String()
 	lvlText = strings.ToUpper(lvlText)
-	lvlText = fmt.Sprintf("%-5s", lvlText)
+	lvlText = fmt.Sprintf("%-5s ", lvlText)
 	buf.WriteString(lvlText)
 }
 
 func fields(buf io.StringWriter, msg message.Message) {
-	buf.WriteString(" ")
-
 	switch msg.Content {
 	case message.DataContent:
 		data := FieldsToTextJSON(msg)

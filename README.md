@@ -4,7 +4,7 @@ Fast, composable structured and unstructured logging for Go
 
 ## TODO
 
-- ToJSON
+- Coloring output in handler
 
 ## Notes
 

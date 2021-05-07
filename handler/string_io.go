@@ -16,23 +16,28 @@ const (
 
 type StringIO struct {
 	writer io.StringWriter
-	Format IOFormat
+	format IOFormat
+	config transform.Config
 }
 
-func BuildStringIO(writer io.StringWriter) StringIO {
-	return BuildStringIOFormatted(writer, TextFormat)
+func BuildStringIOJSON(writer io.StringWriter) StringIO {
+	return StringIO{writer, JSONFormat, transform.DefaultConfig}
 }
 
-func BuildStringIOFormatted(writer io.StringWriter, format IOFormat) StringIO {
-	return StringIO{writer, format}
+func BuildStringIOTextConfigured(writer io.StringWriter, config transform.Config) StringIO {
+	return StringIO{writer, TextFormat, config}
+}
+
+func BuildStringIOText(writer io.StringWriter) StringIO {
+	return BuildStringIOTextConfigured(writer, transform.DefaultConfig)
 }
 
 func (handler StringIO) Handle(msg message.Message) message.Message {
 	var output string
 
-	switch handler.Format {
+	switch handler.format {
 	case TextFormat:
-		output = transform.ToText(msg)
+		output = transform.ToTextConfigured(msg, handler.config)
 	case JSONFormat:
 		output = transform.ToJSON(msg)
 	}

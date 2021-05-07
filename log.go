@@ -1,10 +1,19 @@
 // Package log provides structured and unstructured logging functions
 package log
 
-import "github.com/thehungry-dev/log/message/field"
+import (
+	"os"
+
+	"github.com/thehungry-dev/log/handler"
+	"github.com/thehungry-dev/log/message/field"
+	"github.com/thehungry-dev/log/message/transform"
+)
 
 var Private field.Builder
 var fields field.Builder
+var DefaultWriter Writer
+var TagsWriter Writer
+var JSONWriter Writer
 
 func String(name string, value string) field.Field         { return fields.String(name, value) }
 func Int64(name string, value int64) field.Field           { return fields.Int64(name, value) }
@@ -21,14 +30,49 @@ func Nil(name string, value interface{}) field.Field       { return fields.Nil(n
 func Object(name string, value interface{}) field.Field    { return fields.Object(name, value) }
 func Array(name string, value interface{}) field.Field     { return fields.Array(name, value) }
 
-// var DefaultLogger Handler
+func Tags(tags ...string) Writer        { return DefaultWriter.Tags(tags...) }
+func Data(fields ...field.Field) Writer { return DefaultWriter.Data(fields...) }
+
+func Trace(body string)                 { DefaultWriter.Trace(body) }
+func Tracef(f string, a ...interface{}) { DefaultWriter.Tracef(f, a...) }
+func Debug(body string)                 { DefaultWriter.Debug(body) }
+func Debugf(f string, a ...interface{}) { DefaultWriter.Debugf(f, a...) }
+func Info(body string)                  { DefaultWriter.Info(body) }
+func Infof(f string, a ...interface{})  { DefaultWriter.Infof(f, a...) }
+func Warn(body string)                  { DefaultWriter.Warn(body) }
+func Warnf(f string, a ...interface{})  { DefaultWriter.Warnf(f, a...) }
+func Error(body string)                 { DefaultWriter.Error(body) }
+func Errorf(f string, a ...interface{}) { DefaultWriter.Errorf(f, a...) }
+func Fatal(body string)                 { DefaultWriter.Fatal(body) }
+func Fatalf(f string, a ...interface{}) { DefaultWriter.Fatalf(f, a...) }
 
 // // ParseEnvTagFilter
 // // ParseEnvLevelFilter
 
-// func init() {
-// 	DefaultLogger = Pipe{}
-// }
 func init() {
 	Private = field.Builder{Private: true}
+
+	DefaultWriter = With(
+		handler.BuildPipe(
+			handler.BuildLevelFilter("_min"),
+			handler.BuildTagFilter(""),
+			handler.BuildStringIOText(os.Stderr),
+		),
+	)
+
+	JSONWriter = With(
+		handler.BuildPipe(
+			handler.BuildLevelFilter("_min"),
+			handler.BuildTagFilter(""),
+			handler.BuildStringIOJSON(os.Stderr),
+		),
+	)
+
+	TagsWriter = With(
+		handler.BuildPipe(
+			handler.BuildLevelFilter("_min"),
+			handler.BuildTagFilter(""),
+			handler.BuildStringIOTextConfigured(os.Stderr, transform.EverythingConfig),
+		),
+	)
 }
