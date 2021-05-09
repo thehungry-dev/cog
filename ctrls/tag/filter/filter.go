@@ -28,9 +28,15 @@ func TagsNonMatchingMissingAllRequiredOneOfExample() []string {
 func StringExample() string {
 	return fmt.Sprintf("%s,%s,%s", OneOfTagExample(), RequiredTagExample(), ExcludeTagExample())
 }
+func StringExcludedRequiredExample() string {
+	return fmt.Sprintf("%s,%s", RequiredTagExample(), ExcludeTagExample())
+}
 
 func TagFilterExample() *filter.TagFilter {
 	return filter.Parse(StringExample())
+}
+func TagFilterRequiredExample() *filter.TagFilter {
+	return filter.Parse(StringExcludedRequiredExample())
 }
 func TagFilterNothingExample() *filter.TagFilter {
 	return filter.Nothing

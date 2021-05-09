@@ -6,6 +6,7 @@ Fast, composable structured and unstructured logging for Go
 
 - Coloring output in handler
 - Tag filtering broken for + and -
+- Move all related stuff in separate package, keep "log" package lean to "clone and modify"
 
 ## Notes
 

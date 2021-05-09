@@ -49,6 +49,9 @@ func (set Set) IncludeAny(tags []string) bool {
 	if set == nil {
 		return true
 	}
+	if len(set) == 0 {
+		return true
+	}
 
 	for _, tag := range tags {
 		if _, ok := set[tag]; ok {

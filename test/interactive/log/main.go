@@ -30,7 +30,7 @@ func main() {
 
 	log.
 		JSONWriter.
-		Tags("foo", "bar").
+		Tags("foo", "bar", "baz").
 		Data(
 			log.String("name", "aName"),
 			log.String("lastName", "aLastName"),

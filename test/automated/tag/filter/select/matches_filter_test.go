@@ -1,6 +1,7 @@
 package filter_test
 
 import (
+	"fmt"
 	"testing"
 
 	. "github.com/thehungry-dev/asserting"
@@ -8,7 +9,7 @@ import (
 	ctrls "github.com/thehungry-dev/log/ctrls/tag/filter"
 )
 
-func TestTagFilterSelect(t *testing.T) {
+func TestTagFilterMatchesSelect(t *testing.T) {
 	t.Run("Tag", func(t *testing.T) {
 		t.Run("Filter", func(t *testing.T) {
 			t.Run("Select", func(t *testing.T) {
@@ -34,26 +35,18 @@ func TestTagFilterSelect(t *testing.T) {
 							Assert(t, rejected)
 						})
 					})
-				})
 
-				t.Run("Not matching filter", func(t *testing.T) {
-					t.Run("Missing required tags", func(t *testing.T) {
-						tags := ctrls.TagsNonMatchingMissingRequiredExample()
+					t.Run("Required and excluded tags", func(t *testing.T) {
+						tagFilter = ctrls.TagFilterRequiredExample()
 
-						rejected := tagFilter.Reject(tags)
+						tags := ctrls.TagsMatchingExample()
 
-						t.Run("Rejected", func(t *testing.T) {
-							Assert(t, rejected)
-						})
-					})
+						selected := tagFilter.Select(tags)
 
-					t.Run("Missing required one of tags", func(t *testing.T) {
-						tags := ctrls.TagsNonMatchingMissingAllRequiredOneOfExample()
+						fmt.Printf("tags: %+v\nfilter: %s\n", tags, ctrls.StringExcludedRequiredExample())
 
-						rejected := tagFilter.Reject(tags)
-
-						t.Run("Rejected", func(t *testing.T) {
-							Assert(t, rejected)
+						t.Run("Selected", func(t *testing.T) {
+							Assert(t, selected)
 						})
 					})
 				})
