@@ -55,7 +55,7 @@ func init() {
 		handler.BuildPipe(
 			set.LevelFilter(),
 			set.TagFilter(),
-			handler.BuildStringIOText(device),
+			handler.BuildOutput(device, handler.OutputText),
 		),
 	)
 
@@ -63,7 +63,7 @@ func init() {
 		handler.BuildPipe(
 			set.LevelFilter(),
 			set.TagFilter(),
-			handler.BuildStringIOJSON(device),
+			handler.BuildOutput(device, handler.OutputJSON),
 		),
 	)
 
@@ -71,7 +71,11 @@ func init() {
 		handler.BuildPipe(
 			set.LevelFilter(),
 			set.TagFilter(),
-			handler.BuildStringIOTextConfigured(device, transform.EverythingConfig),
+			handler.Output{
+				Device: device,
+				Format: handler.OutputText,
+				Config: transform.EverythingConfig,
+			},
 		),
 	)
 }
