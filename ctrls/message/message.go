@@ -1,4 +1,4 @@
-package handler
+package message
 
 import (
 	tagfilterctrls "github.com/thehungry-dev/cog/ctrls/tag/filter"

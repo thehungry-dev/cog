@@ -17,38 +17,53 @@ func ToTextConfigured(msg message.Message, config Config) string {
 	text := msg.Body
 
 	var buf strings.Builder
+	painter := config.BuildPainter(&buf)
+
+	painter.BeginMessage(msg)
 
 	if config.Timestamp {
-		timestamp(&buf, msg)
+		painter.BeginTimestamp(msg)
+		putTimestamp(&buf, msg)
+		painter.EndTimestamp(msg)
 	}
 
 	if config.Tags {
-		tags(&buf, msg)
+		painter.BeginTags(msg)
+		putTags(&buf, msg)
+		painter.EndTags(msg)
 	}
 
 	if config.Level {
-		level(&buf, msg)
+		painter.BeginLevel(msg)
+		putLevel(&buf, msg)
+		painter.EndLevel(msg)
 	}
 
+	painter.BeginBody(msg)
 	buf.WriteString(text)
+	painter.EndBody(msg)
 
 	if config.Fields {
-		fields(&buf, msg)
+		painter.BeginFields(msg)
+		putFields(&buf, msg)
+		painter.EndFields(msg)
 	}
+
+	painter.EndMessage(msg)
 
 	buf.WriteString("\n")
 
 	return buf.String()
 }
 
-func timestamp(buf io.StringWriter, msg message.Message) {
+func putTimestamp(buf io.StringWriter, msg message.Message) {
 	buf.WriteString("[")
 	data := msg.Timestamp.Format(time.RFC3339)
 	buf.WriteString(data)
 	buf.WriteString("] ")
 }
 
-func tags(buf io.StringWriter, msg message.Message) {
+func putTags(buf io.StringWriter, msg message.Message) {
 	if len(msg.Tags) == 0 {
 		return
 	}
@@ -65,14 +80,14 @@ func tags(buf io.StringWriter, msg message.Message) {
 	buf.WriteString("| ")
 }
 
-func level(buf io.StringWriter, msg message.Message) {
+func putLevel(buf io.StringWriter, msg message.Message) {
 	lvlText := msg.Level.String()
 	lvlText = strings.ToUpper(lvlText)
 	lvlText = fmt.Sprintf("%-5s ", lvlText)
 	buf.WriteString(lvlText)
 }
 
-func fields(buf io.StringWriter, msg message.Message) {
+func putFields(buf io.StringWriter, msg message.Message) {
 	switch msg.Content {
 	case message.DataContent:
 		data := FieldsToTextJSON(msg)
