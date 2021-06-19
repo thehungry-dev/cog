@@ -1,7 +1,9 @@
 // Package color provides a list of escape sequences to output colored text to terminal
 package color
 
-import "io"
+import (
+	"strings"
+)
 
 const (
 	None   = ""
@@ -17,15 +19,17 @@ const (
 	White  = "\033[97m"
 )
 
-func Apply(writer io.StringWriter, color string, do func()) {
+func IsApplied(text string, color string) bool {
 	if color == None {
-		do()
-		return
+		return IsUncolored(text)
 	}
 
-	writer.WriteString(color)
+	result := strings.HasPrefix(text, color)
+	result = result && strings.HasSuffix(text, Reset+"\n")
 
-	do()
+	return result
+}
 
-	writer.WriteString(Reset)
+func IsUncolored(text string) bool {
+	return !strings.HasSuffix(text, Reset+"\n")
 }

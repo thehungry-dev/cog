@@ -5,7 +5,7 @@ import (
 )
 
 func main() {
-	log := ctrls.LogTextExample()
+	log := ctrls.LogColoredTextExample()
 	log.Tags("foo", "bar", "baz").Trace("A trace message")
 	log.Tags("foo", "bar", "baz").Debug("A debug message")
 	log.Tags("foo", "bar", "baz").Info("An info message")

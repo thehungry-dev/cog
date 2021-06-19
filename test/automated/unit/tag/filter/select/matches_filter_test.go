@@ -1,7 +1,6 @@
 package filter_test
 
 import (
-	"fmt"
 	"testing"
 
 	. "github.com/thehungry-dev/asserting"
@@ -42,8 +41,6 @@ func TestTagFilterMatchesSelect(t *testing.T) {
 						tags := ctrls.TagsMatchingExample()
 
 						selected := tagFilter.Select(tags)
-
-						fmt.Printf("tags: %+v\nfilter: %s\n", tags, ctrls.StringExcludedRequiredExample())
 
 						t.Run("Selected", func(t *testing.T) {
 							Assert(t, selected)

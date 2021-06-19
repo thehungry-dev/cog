@@ -35,3 +35,32 @@ func (lvl Level) String() string {
 
 	return output
 }
+
+func Parse(text string) (Level, error) {
+	var output Level
+
+	switch text {
+	case Trace.String():
+		output = Trace
+	case Debug.String():
+		output = Debug
+	case Info.String():
+		output = Info
+	case Warn.String():
+		output = Warn
+	case Error.String():
+		output = Error
+	case Fatal.String():
+		output = Fatal
+	default:
+		num, err := strconv.Atoi(text)
+
+		if err != nil {
+			return output, err
+		}
+
+		output = Level(num)
+	}
+
+	return output, nil
+}
