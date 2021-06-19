@@ -1,4 +1,4 @@
-// Package transform converts a log message into different formats
+// Package transform converts a build message into different formats
 package transform
 
 type Config struct {

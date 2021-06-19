@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/thehungry-dev/log/level/filter"
-	"github.com/thehungry-dev/log/message"
+	"github.com/thehungry-dev/cog/level/filter"
+	"github.com/thehungry-dev/cog/message"
 )
 
 type LevelFilter struct {

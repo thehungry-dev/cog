@@ -5,9 +5,9 @@ import (
 
 	. "github.com/thehungry-dev/asserting"
 
-	ctrls "github.com/thehungry-dev/log/ctrls/level/filter"
-	"github.com/thehungry-dev/log/level"
-	"github.com/thehungry-dev/log/level/filter"
+	ctrls "github.com/thehungry-dev/cog/ctrls/level/filter"
+	"github.com/thehungry-dev/cog/level"
+	"github.com/thehungry-dev/cog/level/filter"
 )
 
 func TestLevelFilterParse(t *testing.T) {

@@ -5,7 +5,7 @@ import (
 
 	. "github.com/thehungry-dev/asserting"
 
-	ctrls "github.com/thehungry-dev/log/ctrls/tag/filter"
+	ctrls "github.com/thehungry-dev/cog/ctrls/tag/filter"
 )
 
 func TestTagFilterNothingSelect(t *testing.T) {

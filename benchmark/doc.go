@@ -1,4 +1,4 @@
-// Package benchmark provides benchmarking for log
+// Package benchmark provides benchmarking for build
 package benchmark
 
 var ensure interface{}

@@ -1,4 +1,4 @@
-module github.com/thehungry-dev/log
+module github.com/thehungry-dev/cog
 
 go 1.16
 

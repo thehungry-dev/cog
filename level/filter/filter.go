@@ -4,7 +4,7 @@ package filter
 import (
 	"strings"
 
-	"github.com/thehungry-dev/log/level"
+	"github.com/thehungry-dev/cog/level"
 )
 
 const (

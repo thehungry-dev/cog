@@ -1,10 +1,10 @@
 package handler
 
 import (
-	tagfilterctrls "github.com/thehungry-dev/log/ctrls/tag/filter"
-	"github.com/thehungry-dev/log/level"
-	"github.com/thehungry-dev/log/message"
-	"github.com/thehungry-dev/log/message/field"
+	tagfilterctrls "github.com/thehungry-dev/cog/ctrls/tag/filter"
+	"github.com/thehungry-dev/cog/level"
+	"github.com/thehungry-dev/cog/message"
+	"github.com/thehungry-dev/cog/message/field"
 )
 
 func MessageTagsExample() []string {

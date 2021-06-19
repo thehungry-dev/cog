@@ -14,7 +14,7 @@ bench:
 	go test -v -bench=. -run="^$$" $(BENCH_FLAGS);
 
 clean:
-	go clean -i github.com/theungry-dev/log...
+	go clean -i github.com/thehungry-dev/cog...
 
 interactive:
 	go run test/interactive/$(TEST)/main.go

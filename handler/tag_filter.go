@@ -1,8 +1,8 @@
 package handler
 
 import (
-	"github.com/thehungry-dev/log/message"
-	"github.com/thehungry-dev/log/tag/filter"
+	"github.com/thehungry-dev/cog/message"
+	"github.com/thehungry-dev/cog/tag/filter"
 )
 
 type TagFilter struct {

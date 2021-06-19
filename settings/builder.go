@@ -4,11 +4,9 @@ import (
 	"io"
 	"os"
 
-	"github.com/thehungry-dev/log/handler"
-	"github.com/thehungry-dev/log/message/transform"
+	"github.com/thehungry-dev/cog/handler"
+	"github.com/thehungry-dev/cog/message/transform"
 )
-
-const DefaultTagFilterText = "_all"
 
 type nullStringWriter struct{}
 

@@ -1,3 +1,3 @@
-module github.com/thehungry-dev/log/benchmark
+module github.com/thehungry-dev/cog/benchmark
 
 go 1.16

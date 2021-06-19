@@ -3,8 +3,8 @@ package handler
 import (
 	"io"
 
-	"github.com/thehungry-dev/log/message"
-	"github.com/thehungry-dev/log/message/transform"
+	"github.com/thehungry-dev/cog/message"
+	"github.com/thehungry-dev/cog/message/transform"
 )
 
 type OutputFormat int8

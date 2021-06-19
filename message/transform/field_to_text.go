@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/thehungry-dev/log/message"
-	"github.com/thehungry-dev/log/message/field"
+	"github.com/thehungry-dev/cog/message"
+	"github.com/thehungry-dev/cog/message/field"
 )
 
 func FieldToText(fld field.Field) (string, bool) {

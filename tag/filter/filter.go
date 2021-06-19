@@ -4,7 +4,7 @@ package filter
 import (
 	"strings"
 
-	"github.com/thehungry-dev/log/tag"
+	"github.com/thehungry-dev/cog/tag"
 )
 
 const TagSeparator = ","

@@ -5,8 +5,8 @@ import (
 
 	. "github.com/thehungry-dev/asserting"
 
-	ctrls "github.com/thehungry-dev/log/ctrls/handler"
-	msgctrls "github.com/thehungry-dev/log/ctrls/message"
+	ctrls "github.com/thehungry-dev/cog/ctrls/handler"
+	msgctrls "github.com/thehungry-dev/cog/ctrls/message"
 )
 
 func TestTagFilterHandler(t *testing.T) {

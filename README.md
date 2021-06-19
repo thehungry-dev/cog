@@ -1,15 +1,16 @@
-# Hungry Log
+# Cog
 
-Fast, composable structured and unstructured logging for Go
+Cog provides the building blocks for creating the logging mechanism
+tailored to the need of your software.
 
 ## TODO
 
 - Coloring output in handler
 - Tag filtering broken for + and -
-- Move all related stuff in separate package, keep "log" package lean to "clone and modify"
+- Move all related stuff in separate package, keep "build" package lean to "clone and modify"
 
 ## Notes
 
-- Logger should be a nice API for developer, has Trace, Debug, Info and similar methods
-- A lower level interface of Logger is Handler
+- build should be a nice API for developer, has Trace, Debug, Info and similar methods
+- A lower level interface of build is Handler
 - Message should be struct to maximize performance (instead of interface)

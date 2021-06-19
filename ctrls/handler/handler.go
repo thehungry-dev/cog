@@ -2,9 +2,9 @@
 package handler
 
 import (
-	tagfilterctrls "github.com/thehungry-dev/log/ctrls/tag/filter"
-	"github.com/thehungry-dev/log/handler"
-	levelfilter "github.com/thehungry-dev/log/level/filter"
+	tagfilterctrls "github.com/thehungry-dev/cog/ctrls/tag/filter"
+	"github.com/thehungry-dev/cog/handler"
+	levelfilter "github.com/thehungry-dev/cog/level/filter"
 )
 
 func TagFilterExample() handler.Handler {

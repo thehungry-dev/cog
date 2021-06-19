@@ -1,11 +1,11 @@
-// Package message helps building a log message
+// Package message helps building a build message
 package message
 
 import (
 	"time"
 
-	"github.com/thehungry-dev/log/level"
-	"github.com/thehungry-dev/log/message/field"
+	"github.com/thehungry-dev/cog/level"
+	"github.com/thehungry-dev/cog/message/field"
 )
 
 type Message struct {

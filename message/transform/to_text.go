@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/thehungry-dev/log/message"
+	"github.com/thehungry-dev/cog/message"
 )
 
 func ToText(msg message.Message) string {

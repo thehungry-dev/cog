@@ -1,2 +1,2 @@
-// Package tag provides functions to filter log messages based on tags
+// Package tag provides functions to filter build messages based on tags
 package tag

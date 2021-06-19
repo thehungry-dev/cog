@@ -1,6 +1,6 @@
 package handler
 
-import "github.com/thehungry-dev/log/message"
+import "github.com/thehungry-dev/cog/message"
 
 type Pipe []Handler
 

@@ -4,7 +4,7 @@ package filter
 import (
 	"fmt"
 
-	"github.com/thehungry-dev/log/tag/filter"
+	"github.com/thehungry-dev/cog/tag/filter"
 )
 
 func TagNameOneOfExample() string    { return "aTag" }

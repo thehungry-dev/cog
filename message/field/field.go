@@ -1,4 +1,4 @@
-// Package field represents a single message field for a log message
+// Package field represents a single message field for a build message
 package field
 
 type Type uint8

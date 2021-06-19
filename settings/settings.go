@@ -1,2 +1,2 @@
-// Package settings configures log for logging
+// Package settings configures build for logging
 package settings

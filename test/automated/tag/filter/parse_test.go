@@ -5,8 +5,8 @@ import (
 
 	. "github.com/thehungry-dev/asserting"
 
-	ctrls "github.com/thehungry-dev/log/ctrls/tag/filter"
-	"github.com/thehungry-dev/log/tag/filter"
+	ctrls "github.com/thehungry-dev/cog/ctrls/tag/filter"
+	"github.com/thehungry-dev/cog/tag/filter"
 )
 
 func TestTagFilterParse(t *testing.T) {

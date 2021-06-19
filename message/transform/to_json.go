@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/thehungry-dev/log/message"
+	"github.com/thehungry-dev/cog/message"
 )
 
 type messageJSON struct {

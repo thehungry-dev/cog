@@ -3,8 +3,8 @@ package transform
 import (
 	"math"
 
-	"github.com/thehungry-dev/log/message"
-	"github.com/thehungry-dev/log/message/field"
+	"github.com/thehungry-dev/cog/message"
+	"github.com/thehungry-dev/cog/message/field"
 )
 
 func FieldToJSONType(fld field.Field) (interface{}, bool) {

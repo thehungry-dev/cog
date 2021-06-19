@@ -1,10 +1,10 @@
-package log
+package cog
 
 import (
-	"github.com/thehungry-dev/log/handler"
-	"github.com/thehungry-dev/log/level"
-	"github.com/thehungry-dev/log/message"
-	"github.com/thehungry-dev/log/message/field"
+	"github.com/thehungry-dev/cog/handler"
+	"github.com/thehungry-dev/cog/level"
+	"github.com/thehungry-dev/cog/message"
+	"github.com/thehungry-dev/cog/message/field"
 )
 
 type Writer struct {

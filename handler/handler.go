@@ -1,7 +1,7 @@
-// Package handler provides functions to process log messages for output
+// Package handler provides functions to process build messages for output
 package handler
 
-import "github.com/thehungry-dev/log/message"
+import "github.com/thehungry-dev/cog/message"
 
 type Handler interface {
 	Handle(msg message.Message) message.Message

@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/thehungry-dev/log/level"
-	"github.com/thehungry-dev/log/message/field"
+	"github.com/thehungry-dev/cog/level"
+	"github.com/thehungry-dev/cog/message/field"
 )
 
 type Builder struct {
