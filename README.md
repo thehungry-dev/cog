@@ -3,14 +3,50 @@
 Cog provides the building blocks for creating the logging mechanism
 tailored to the need of your software.
 
-## TODO
+## Usage
 
-- Coloring output in handler
-- Tag filtering broken for + and -
-- Move all related stuff in separate package, keep "build" package lean to "clone and modify"
+```go
+package mypkg
 
-## Notes
+import (
+	"github.com/thehungry-dev/cog"
+	"github.com/thehungry-dev/cog/handler"
+	"github.com/thehungry-dev/cog/message/field"
+	"github.com/thehungry-dev/cog/message/transform"
+	"github.com/thehungry-dev/cog/settings"
+)
 
-- build should be a nice API for developer, has Trace, Debug, Info and similar methods
-- A lower level interface of build is Handler
-- Message should be struct to maximize performance (instead of interface)
+var Log cog.Writer
+
+func init() {
+	set := settings.Getenv()
+	device := set.Device()
+
+  // Builds a writer that can filter log output by level, by tag and outputs colored log messages
+	Log = cog.With(
+		handler.BuildPipe(
+			set.LevelFilter(),
+			set.TagFilter(),
+			handler.BuildOutput(device, handler.OutputText),
+		),
+	)
+}
+```
+
+```go
+package main
+
+func main() {
+  log := mypkg.Log
+  fields := field.Builder{}
+  log.Info("some message")
+  log.Tags("tag1", "tag2").Warn("some message")
+  log.
+    Tags("tag1",  "data").
+    Data(
+      fields.String("Name", "some name"),
+      fields.Bool("SomeBool", true)
+    ).
+    Fatalf("Interpolated %s", "message")
+}
+```
