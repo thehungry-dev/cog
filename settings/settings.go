@@ -4,6 +4,7 @@ package settings
 import (
 	"io"
 	"os"
+	"strings"
 
 	"github.com/thehungry-dev/cog/device"
 	"github.com/thehungry-dev/cog/handler"
@@ -12,6 +13,8 @@ import (
 	"github.com/thehungry-dev/cog/terminal"
 )
 
+const DefaultFiltersText = "level,tag"
+
 type Builder struct {
 	TagFilterText    string
 	LevelFilterText  string
@@ -19,6 +22,7 @@ type Builder struct {
 	TagsOutputText   string
 	OutputFormatText string
 	ColorText        string
+	FiltersText      string
 }
 
 func Getenv() Builder {
@@ -29,6 +33,7 @@ func Getenv() Builder {
 		TagsOutputText:   os.Getenv("LOG_TAGS_OUTPUT"),
 		OutputFormatText: os.Getenv("LOG_OUTPUT_FORMAT"),
 		ColorText:        os.Getenv("LOG_COLOR"),
+		FiltersText:      os.Getenv("LOG_FILTERS"),
 	}
 }
 
@@ -41,6 +46,41 @@ func (builder Builder) LevelFilter() handler.Handler {
 	} else {
 		return handler.Passthrough
 	}
+}
+func (builder Builder) GetFilter(name string) handler.Handler {
+	var filter handler.Handler
+
+	switch name {
+	case "level":
+		filter = builder.LevelFilter()
+	case "tag":
+		filter = builder.TagFilter()
+	default:
+		panic("Unknown filter name")
+	}
+
+	return filter
+}
+func (builder Builder) Filters() []handler.Handler {
+	filtersText := builder.FiltersText
+	filters := []handler.Handler{}
+
+	if filtersText == "_none" {
+		return filters
+	}
+
+	if filtersText == "" {
+		filtersText = DefaultFiltersText
+	}
+
+	filterNames := strings.Split(filtersText, ",")
+
+	for _, filterName := range filterNames {
+		filter := builder.GetFilter(filterName)
+		filters = append(filters, filter)
+	}
+
+	return filters
 }
 func (builder Builder) OutputHandler() handler.Handler {
 	config := transform.DefaultConfig
