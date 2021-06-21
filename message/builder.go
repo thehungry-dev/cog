@@ -2,7 +2,6 @@ package message
 
 import (
 	"fmt"
-	"strings"
 	"time"
 
 	"github.com/thehungry-dev/cog/level"
@@ -52,16 +51,7 @@ func (builder Builder) Put(lvl level.Level, body string) Builder {
 }
 
 func (builder Builder) Putf(lvl level.Level, format string, a ...interface{}) Builder {
-	var buf strings.Builder
-
-	base := fmt.Sprintf(format, a...)
-
-	buf.WriteString(base)
-	if !strings.HasSuffix(base, "\n") {
-		buf.WriteString("\n")
-	}
-
-	body := buf.String()
+	body := fmt.Sprintf(format, a...)
 
 	return builder.Put(lvl, body)
 }
