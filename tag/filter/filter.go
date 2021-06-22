@@ -79,21 +79,57 @@ func (tagFilter *TagFilter) IsRequiredOneOfTag(tag string) bool {
 	}
 	return tagFilter.oneOfTags.Include(tag)
 }
+func (tagFilter *TagFilter) String() string {
+	if tagFilter == nil || tagFilter == Nothing {
+		return "_all"
+	}
+
+	tags := make([]string, 0)
+	if tagFilter.untagged {
+		tags = append(tags, UntaggedKeyword)
+	}
+
+	for tag := range tagFilter.oneOfTags {
+		tags = append(tags, tag)
+	}
+	for tag := range tagFilter.requiredTags {
+		tags = append(tags, "+"+tag)
+	}
+	for tag := range tagFilter.excludedTags {
+		tags = append(tags, "-"+tag)
+	}
+
+	return strings.Join(tags, TagSeparator)
+}
+func (tagFilter *TagFilter) IsUntaggedOnly() bool {
+	return tagFilter.oneOfTags.IsEmpty() &&
+		tagFilter.excludedTags.IsEmpty() &&
+		tagFilter.requiredTags.IsEmpty() &&
+		tagFilter.untagged
+}
 
 func (tagFilter *TagFilter) Select(tags []string) bool {
-	if tagFilter == nil {
+	if tagFilter == nil || tagFilter == Nothing {
 		return true
 	}
+
 	if len(tags) == 0 {
 		return tagFilter.untagged
 	}
+
 	if !tagFilter.requiredTags.SubsetOf(tags) {
 		return false
 	}
-	if tagFilter.excludedTags.IncludeAny(tags) {
+
+	if !tagFilter.excludedTags.IsEmpty() && tagFilter.excludedTags.IncludeAny(tags) {
 		return false
 	}
+
 	if !tagFilter.oneOfTags.IncludeAny(tags) {
+		return false
+	}
+
+	if tagFilter.IsUntaggedOnly() && len(tags) > 0 {
 		return false
 	}
 

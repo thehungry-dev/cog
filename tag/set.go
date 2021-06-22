@@ -90,3 +90,11 @@ func (set Set) Exclude(tag string) bool {
 
 	return !ok
 }
+
+func (set Set) IsEmpty() bool {
+	if set == nil {
+		return true
+	}
+
+	return len(set) == 0
+}
