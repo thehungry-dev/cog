@@ -6,5 +6,7 @@ github.com/olekukonko/tablewriter v0.0.5 h1:P2Ga83D34wi1o9J6Wh1mRuqd4mF/x/lgBS7N
 github.com/olekukonko/tablewriter v0.0.5/go.mod h1:hPp6KlRPjbx+hW8ykQs1w3UBbZlj6HuIJcUGPhkA7kY=
 github.com/thehungry-dev/asserting v0.2.0 h1:hgQgVuRR7zUOSF547H0MQ2JvZdAwxLIC2f9cukQMCl4=
 github.com/thehungry-dev/asserting v0.2.0/go.mod h1:rwslLo/jyrmtsHYm8f9YIuI2qKwUQAQUR/oCz1jeN6A=
+github.com/thehungry-dev/testmatrix v0.1.0 h1:+jKmcVccYMQC8lUPBJcnbH1pE3P5a8lXjqwmSGmPzKw=
+github.com/thehungry-dev/testmatrix v0.1.0/go.mod h1:NcvPVJyaao9uoGlm+qQXg29KJZ2kCc7HJozTWqPNBtI=
 golang.org/x/sys v0.0.0-20200116001909-b77594299b42 h1:vEOn+mP2zCOVzKckCZy6YsCtDblrpj/w7B9nxGNELpg=
 golang.org/x/sys v0.0.0-20200116001909-b77594299b42/go.mod h1:h1NjWce9XRLGQEsW7wpKNCjG9DtNlClVuFLEZdDNbEs=

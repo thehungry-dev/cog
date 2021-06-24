@@ -2,9 +2,11 @@ package filter_test
 
 import (
 	_ "embed"
+	"strings"
 	"testing"
 
-	"github.com/thehungry-dev/cog/cogtest"
+	"github.com/thehungry-dev/cog/tag/filter"
+	"github.com/thehungry-dev/testmatrix"
 )
 
 //go:embed matrix.csv
@@ -15,7 +17,19 @@ func TestTagFilterSelectMatrix(t *testing.T) {
 		t.Run("Filter", func(t *testing.T) {
 			t.Run("Select", func(t *testing.T) {
 				t.Run("Matrix", func(t *testing.T) {
-					cogtest.AssertMatrix(t, matrixFile)
+					matrix := testmatrix.NewColoredTestMatrix(t)
+					reader := strings.NewReader(matrixFile)
+
+					matrix.AssertCsv(reader, func(filterText string, tagsText string) bool {
+						tags := strings.Split(tagsText, filter.TagSeparator)
+						if tagsText == "" {
+							tags = []string{}
+						}
+
+						filter := filter.Parse(filterText)
+
+						return filter.Select(tags)
+					})
 				})
 			})
 		})
